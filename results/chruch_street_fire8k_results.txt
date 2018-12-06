@@ -1,0 +1,18 @@
+# AP and precision/recall per class
+33.27% = person AP  
+ Precision: 0.548640167177
+ Recall   :0.322494418073
+
+
+# mAP of all classes
+mAP = 33.27%
+
+# Number of ground-truth objects per class
+person: 60206
+
+# Number of predicted objects per class
+bus: 5 (tp:0, fp:5)
+car: 11270 (tp:0, fp:11270)
+fire: 4838 (tp:0, fp:4838)
+person: 119188 (tp:22209, fp:96979)
+truck: 47 (tp:0, fp:47)

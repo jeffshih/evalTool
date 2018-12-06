@@ -1,0 +1,33 @@
+# AP and precision/recall per class
+0.11% = bus AP  
+ Precision: 0.0100203194164
+ Recall   :0.0459931874876
+
+31.29% = car AP  
+ Precision: 0.94233859415
+ Recall   :0.189292377677
+
+0.00% = motorcycle AP  
+ Precision: 0.0
+ Recall   :0.5
+
+8.71% = truck AP  
+ Precision: 0.758043138102
+ Recall   :0.0654263771186
+
+
+# mAP of all classes
+mAP = 10.03%
+
+# Number of ground-truth objects per class
+bus: 322
+car: 57374
+motorcycle: 8456
+truck: 3776
+
+# Number of predicted objects per class
+bus: 3200 (tp:26, fp:3174)
+car: 23833 (tp:18688, fp:5145)
+fire: 215 (tp:0, fp:215)
+person: 3541 (tp:0, fp:3541)
+truck: 718 (tp:402, fp:316)
