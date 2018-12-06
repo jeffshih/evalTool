@@ -20,24 +20,22 @@ def bboxTransform(bbox):
 
 def transform(dataName,modelName,threshold):
     fileName = 'res'
-    directory = '/root/data/data-{}/{}/{}/set01/V000.txt'.format(dataName,fileName,modelName)
-    print directory
+    directory = 'data-{}/{}/{}/set01/V000.txt'.format(dataName,fileName,modelName)
     f = open(directory,'r')
     preds = {}
-    cnt = 1
+    prev = 1
     fileName = 'transformed'
-    directory = '/root/data/data-{}/{}/{}/set01'.format(dataName,fileName,modelName)
+    directory = './data-{}/{}/{}/set01'.format(dataName,fileName,modelName)
     if not os.path.exists(directory):
         os.makedirs(directory)
     for lines in f:
         placeHolder = str(lines).split(",")
         score = float(placeHolder[5])
         frameNum = placeHolder[0]
-        with open('/root/data/data-{}/{}/{}/set01/set01_V000_I{}.jpg.txt'.format(dataName,fileName,modelName,frameNum),'ab') as w:
+        with open('data-{}/{}/{}/set01/set01_V000_I{}.jpg.txt'.format(dataName,fileName,modelName,frameNum),'ab') as w:
             if score <= threshold:
                 continue
-            cnt = int(frameNum)
-	    pred = []
+            pred = []
             pred.append(placeHolder[6].split('\n')[0])#label
             pred.append(str(score/100.0))
             bbox = [float(i) for i in placeHolder[1:5]]
@@ -46,6 +44,7 @@ def transform(dataName,modelName,threshold):
             pred[5] = pred[5]+'\n'
             annotations =  " ".join(pred)
             w.write(annotations)
+            cnt = int(frameNum)
     print cnt
 
     f.close()
@@ -58,12 +57,12 @@ def processGT(dataName):
     frames = {}
 
     for key,value in annos['1'].iteritems():
-        directory = '/root/data/data-{}/ground-truth/set01'.format(dataName)
+        directory = 'data-{}/ground-truth/set01'.format(dataName)
         if not os.path.exists(directory):
             os.makedirs(directory)
         if key == '0':
             continue
-        w = open('/root/data/data-{}/ground-truth/set01/set01_V000_I{}.jpg.txt'.format(dataName,key),'w')
+        w = open('data-{}/ground-truth/set01/set01_V000_I{}.jpg.txt'.format(dataName,key),'w')
         for key, annos in value.iteritems():
             line = []
             label = annos['label']
@@ -84,7 +83,7 @@ def processGT(dataName):
 
 dataName = args.dataset
 modelName = args.model
-threshold = int(args.threshold)
+threshold = args.threshold
 
 processGT(dataName)
 transform(dataName,modelName,threshold)
